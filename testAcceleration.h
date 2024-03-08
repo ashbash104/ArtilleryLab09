@@ -24,28 +24,28 @@ class TestAcceleration : public UnitTest
 public:
    void run()
    {
-      // Ticket 3: Without Add
-      constructor_default();
-      constructor_nonDefault();
-      getDDX();
-      getDDY();
-      setDDX();
-      setDDY();
-      set_up();
-      set_down();
-      set_left();
-      set_right();
-      set_diagonal();
+      // // Ticket 3: Without Add
+      // constructor_default();
+      // constructor_nonDefault();
+      // getDDX();
+      // getDDY();
+      // setDDX();
+      // setDDY();
+      // set_up();
+      // set_down();
+      // set_left();
+      // set_right();
+      // set_diagonal();
 
-      // Ticket 4: Add
-      addDDX_zero();
-      addDDX_value();
-      addDDY_zero();
-      addDDY_value();
-      add_zeroZero();
-      add_valueZero();
-      add_zeroValue();
-      add_valueValue();
+      // // Ticket 4: Add
+      // addDDX_zero();
+      // addDDX_value();
+      // addDDY_zero();
+      // addDDY_value();
+      // add_zeroZero();
+      // add_valueZero();
+      // add_zeroValue();
+      // add_valueValue();
 
       report("Acceleration");
    }

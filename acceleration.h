@@ -32,15 +32,24 @@ public:
    // constructors
    Acceleration()                       : ddx(9.9), ddy(9.9) { }
    Acceleration(double ddx, double ddy) : ddx(9.9), ddy(9.9) { }
+   Acceleration(double a, Angle angle);
 
    // getters
    virtual double getDDX()   const           { return 9.9;             }
    virtual double getDDY()   const           { return 9.9;             }
+   double getAcceleration() const;
 
    // setters                        
    virtual void setDDX(double ddx)           {  }
    virtual void setDDY(double ddy)           {  }
    virtual void set(const Angle & a, double magnitude);
+   virtual void addDDX(double ddx) { }
+   virtual void addDDY(double ddy) { }
+   virtual void add(const Acceleration& rhs) { }
+
+   // methods
+   double computeDDX(double total, Angle angle);
+   double computeDDY(double total, Angle angle);
 
 private:
    double ddx;     // horizontal acceleration
@@ -69,4 +78,5 @@ public:
    virtual void addDDX(double ddx)           { assert(false); }
    virtual void addDDY(double ddy)           { assert(false); }
    virtual void add(const Acceleration& rhs) { assert(false); }
+
 };

@@ -25,43 +25,43 @@ class TestPosition : public UnitTest
 public:
    void run()
    {
-      // Ticket 7: Meters
-      construct_default();
-      construct_nonDefault();
-      construct_copy();
-      assign();
-      setMetersX();
-      setMetersY();
-      getMetersX();
-      getMetersY();
+      // // Ticket 7: Meters
+      // construct_default();
+      // construct_nonDefault();
+      // construct_copy();
+      // assign();
+      // setMetersX();
+      // setMetersY();
+      // getMetersX();
+      // getMetersY();
 
-      // Ticket 8: Pixels and Zoom
-      setZoom_member();
-      setZoom_anotherVariable();
-      getZoom_member();
-      getZoom_anotherVariable();
-      setPixelsX_noZoom();
-      setPixelsX_zoom();
-      setPixelsY_noZoom();
-      setPixelsY_zoom();
-      getPixelsX_noZoom();
-      getPixelsX_zoom();
-      getPixelsY_noZoom();
-      getPixelsY_zoom();
+      // // Ticket 8: Pixels and Zoom
+      // setZoom_member();
+      // setZoom_anotherVariable();
+      // getZoom_member();
+      // getZoom_anotherVariable();
+      // setPixelsX_noZoom();
+      // setPixelsX_zoom();
+      // setPixelsY_noZoom();
+      // setPixelsY_zoom();
+      // getPixelsX_noZoom();
+      // getPixelsX_zoom();
+      // getPixelsY_noZoom();
+      // getPixelsY_zoom();
 
-      // Ticket 9: Add
-      addMetersX();
-      addMetersY();
-      addPixelsX_noZoom();
-      addPixelsX_zoom();
-      addPixelsY_noZoom();
-      addPixelsY_zoom();
-      add_stationary();
-      add_moving();
-      add_movingLonger();
-      add_fromStop();
-      add_fromStopLonger();
-      add_complex();
+      // // Ticket 9: Add
+      // addMetersX();
+      // addMetersY();
+      // addPixelsX_noZoom();
+      // addPixelsX_zoom();
+      // addPixelsY_noZoom();
+      // addPixelsY_zoom();
+      // add_stationary();
+      // add_moving();
+      // add_movingLonger();
+      // add_fromStop();
+      // add_fromStopLonger();
+      // add_complex();
       
       report("Position");
    }

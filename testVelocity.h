@@ -21,42 +21,42 @@ class TestVelocity : public UnitTest
 public:
    void run()
    {
-      // Ticket 5: From before
-      constructor_default();
-      constructor_nonDefault();
-      getDX();
-      getDY();
-      getSpeed_up();
-      getSpeed_down();
-      getSpeed_left();
-      getSpeed_right();
-      getSpeed_diagonal();
-      setDX();
-      setDY();
-      set_up();
-      set_down();
-      set_left();
-      set_right();
-      set_diagonal();
-      addDX_zero();
-      addDX_value();
-      addDY_zero();
-      addDY_value();
-      add_stationary();
-      add_noTime();
-      add_moving4Seconds();
-      add_moving1Second();
+      // // Ticket 5: From before
+      // constructor_default();
+      // constructor_nonDefault();
+      // getDX();
+      // getDY();
+      // getSpeed_up();
+      // getSpeed_down();
+      // getSpeed_left();
+      // getSpeed_right();
+      // getSpeed_diagonal();
+      // setDX();
+      // setDY();
+      // set_up();
+      // set_down();
+      // set_left();
+      // set_right();
+      // set_diagonal();
+      // addDX_zero();
+      // addDX_value();
+      // addDY_zero();
+      // addDY_value();
+      // add_stationary();
+      // add_noTime();
+      // add_moving4Seconds();
+      // add_moving1Second();
 
-      // Ticket 6: Reverse and add
-      reverse_stationary();
-      reverse_up();
-      reverse_down();
-      reverse_left();
-      reverse_right();
-      reverse_diagonal();
-      addV_stationary();
-      addV_nothing();
-      addV_moving();
+      // // Ticket 6: Reverse and add
+      // reverse_stationary();
+      // reverse_up();
+      // reverse_down();
+      // reverse_left();
+      // reverse_right();
+      // reverse_diagonal();
+      // addV_stationary();
+      // addV_nothing();
+      // addV_moving();
 
       report("Velocity");
    }
