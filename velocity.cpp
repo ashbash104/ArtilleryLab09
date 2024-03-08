@@ -2,7 +2,7 @@
  * Source File:
  *    VELOCITY
  * Author:
- *    <your name here>
+ *    Ashlee Hart, Emily Raventos
  * Summary:
  *    Everything we need to know about speed
  ************************************************************************/ 

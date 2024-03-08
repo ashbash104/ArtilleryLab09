@@ -2,7 +2,7 @@
  * Header File:
  *    TEST ACCELERATION
  * Author:
- *    <your name here>
+ *    Br. Helfrich, Ashlee Hart, Emily Raventos
  * Summary:
  *    Unit tests for the Acceleration class.
  ************************************************************************/

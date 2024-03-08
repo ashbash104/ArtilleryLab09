@@ -2,7 +2,7 @@
  * Header File:
  *    TEST ANGLE
  * Author:
- *    <your name here>
+ *    Br. Helfrich, Ashlee Hart, Emily Raventos
  * Summary:
  *    All the unit tests for ANGLE
  ************************************************************************/

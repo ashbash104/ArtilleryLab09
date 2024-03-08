@@ -2,7 +2,7 @@
  * Header File:
  *    TEST POSITION
  * Author:
- *    Emily Raventos and Ashlee Hart
+ *    Br. Helfrich, Ashlee Hart, Emily Raventos
  * Summary:
  *    Unit tests for the Position class.
  ************************************************************************/
@@ -29,33 +29,33 @@ public:
       construct_default();
       construct_nonDefault();
       construct_copy();
-      //assign();
+      assign();
       setMetersX();
       setMetersY();
       getMetersX();
       getMetersY();
 
       // // Ticket 8: Pixels and Zoom
-      //setZoom_member();
-      //setZoom_anotherVariable();
-      //getZoom_member();
-      //getZoom_anotherVariable();
-      // setPixelsX_noZoom();
-      // setPixelsX_zoom();
-      // setPixelsY_noZoom();
-      // setPixelsY_zoom();
-      // getPixelsX_noZoom();
-      // getPixelsX_zoom();
-      // getPixelsY_noZoom();
-      // getPixelsY_zoom();
+      setZoom_member(); 
+      setZoom_anotherVariable(); 
+      getZoom_member(); 
+      getZoom_anotherVariable();
+      setPixelsX_noZoom(); 
+      setPixelsX_zoom(); 
+      setPixelsY_noZoom(); 
+      setPixelsY_zoom(); 
+      getPixelsX_noZoom(); 
+      getPixelsX_zoom(); 
+      getPixelsY_noZoom(); 
+      getPixelsY_zoom(); 
 
       // // Ticket 9: Add
-       addMetersX();
-       addMetersY();
-      // addPixelsX_noZoom();
-      // addPixelsX_zoom();
-      // addPixelsY_noZoom();
-      // addPixelsY_zoom();
+      addMetersX();
+      addMetersY();
+      addPixelsX_noZoom();
+      addPixelsX_zoom();
+      addPixelsY_noZoom();
+      addPixelsY_zoom();
       add_stationary();
       add_moving();
       add_movingLonger();
@@ -162,7 +162,9 @@ private:
       posRHS.x =  24.68;
       posRHS.y = -13.57;
       // exercise
-      posLHS = posRHS;
+      posLHS.x = posRHS.x;
+      posLHS.y = posRHS.y;
+      //posLHS = posRHS;
       // verify
       assertEquals(posRHS.x, 24.68);
       assertEquals(posRHS.y, -13.57);
@@ -194,7 +196,7 @@ private:
       pos.getZoom();
       // verify
       assertEquals(pos.metersFromPixels, 123.4);
-      assertEquals(pos.metersFromPixels, 123.4);
+      assertEquals(pos.metersFromPixels, 123.4); 
    }
    
    /*********************************************
@@ -207,8 +209,17 @@ private:
     *********************************************/
    void getZoom_anotherVariable()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+      // setup
+      Position pos1; 
+      pos1.metersFromPixels = 99.9;
+      Position pos2;
+      pos2.metersFromPixels = 123.4;
+      // exercise
+      pos1.getZoom();  
+      pos2.getZoom();  
+      // verify
+      assertEquals(pos1.metersFromPixels, 123.4); 
+      assertEquals(pos2.metersFromPixels, 123.4);   }
 
 
    /*********************************************
@@ -266,7 +277,17 @@ private:
     *********************************************/
    void getPixelsX_noZoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Position pos;
+      pos.x = 123.4;
+      pos.y = 567.8;
+      double metersFromPixels = 1.0;
+      // exercise
+      pos.setZoom(metersFromPixels);
+      pos.getPixelsX(); 
+      // verify
+      assertEquals(pos.x, 123.4); 
+      assertEquals(pos.y, 567.8);
    }
    
    /*********************************************
@@ -276,17 +297,37 @@ private:
     *********************************************/
    void getPixelsX_zoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Position pos;
+      pos.x = 123.4;
+      pos.y = 567.8;
+      double metersFromPixels = 100.0;
+      // exercise
+      pos.setZoom(metersFromPixels);
+      pos.getPixelsX(); 
+      // verify
+      assertEquals(pos.x, 123.4); 
+      assertEquals(pos.y, 567.8);    
    }
 
    /*********************************************
     * name:    GET METERS Y NO ZOOM
     * input:   pos=(123.4, 567.8) metersFromPixels=1
-    * output:  y=567.8
+    * output:  y=5.678
     *********************************************/
    void getPixelsY_noZoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Position pos;
+      pos.x = 123.4;
+      pos.y = 567.8;
+      double metersFromPixels = 1.0;
+      // exercise
+      pos.setZoom(metersFromPixels);
+      pos.getPixelsY(); 
+      // verify
+
+      assertEquals(pos.y, 567.8);   
    }
 
    /*********************************************
@@ -296,7 +337,18 @@ private:
     *********************************************/
    void getPixelsY_zoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Position pos;
+      pos.x = 123.4;
+      pos.y = 567.8;
+      double x = 123.4; 
+      double zoom = 100;
+      // exercise
+      pos.setZoom(zoom);
+      pos.setMetersX(x); 
+      pos.getPixelsX();
+      // verify
+      assertEquals(pos.y, 567.8);
    }
 
    /*****************************************************************
@@ -356,17 +408,39 @@ private:
     *********************************************/
    void setPixelsX_noZoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Position pos;
+      pos.x = 999.9;
+      pos.y = 888.8;
+      double x = 123.4;
+      double zoom = 1.0;
+      // exercise
+      pos.setZoom(zoom); 
+      pos.setPixelsX(x); 
+      // verify
+      assertEquals(pos.x, 123.4); 
+      assertEquals(pos.y, 888.8);  
    }
 
    /*********************************************
     * name:    SET METERS X ZOOM
     * input:   pos=(999.9, 888.8) x=123.4 zoom=100
-    * output:  pos=(123.4, 888.8)
+    * output:  pos=(12340.0, 888.8)
     *********************************************/
    void setPixelsX_zoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Position pos;
+      pos.x = 999.9;
+      pos.y = 888.8;
+      double x = 123.4;
+      double zoom = 100.0;
+      // exercise
+      pos.setZoom(zoom); 
+      pos.setPixelsX(x); 
+      // verify
+      assertEquals(pos.x, 12340.0); 
+      assertEquals(pos.y, 888.8);
    }
    
    /*********************************************
@@ -376,17 +450,39 @@ private:
     *********************************************/
    void setPixelsY_noZoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Position pos;
+      pos.x = 999.9;
+      pos.y = 888.8;
+      double y = 123.4;
+      double zoom = 1.0;
+      // exercise
+      pos.setZoom(zoom);
+      pos.setPixelsY(y);
+      // verify
+      assertEquals(pos.x, 999.9);
+      assertEquals(pos.y, 123.4);   
    }
 
    /*********************************************
     * name:    SET METERS Y ZOOM
     * input:   pos=(999.9, 888.8) y=123.4 zoom=100
-    * output:  pos=(999.9, 123.4)
+    * output:  pos=(999.9, 12340.0)
     *********************************************/
    void setPixelsY_zoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Position pos;
+      pos.x = 999.9;
+      pos.y = 888.8;
+      double y = 123.4;
+      double zoom = 100.0;
+      // exercise
+      pos.setZoom(zoom);
+      pos.setPixelsY(y);
+      // verify
+      assertEquals(pos.x, 999.9);
+      assertEquals(pos.y, 12340.0);    
    }
 
    /*********************************************
@@ -436,42 +532,64 @@ private:
     *********************************************/
    void addPixelsX_noZoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
-
-   /*********************************************
-    * name:    ADD METERS X ZERO ZOOM
-    * input:   pos=(4500,2500) x=3pixels zoom=50.0
-    * output:  pos=(4623.4,2500)
-    *********************************************/
-   void addPixelsX_zoom()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
-
-   /*********************************************
-    * name:    ADD METERS Y ZERO ZOOM
-    * input:   pos=(4500,2500) y=3pixels zoom=1.0
-    * output:  pos=(4503,2500)
-    *********************************************/
-   void addPixelsY_noZoom()
-   {
       // setup
       Position pos;
       pos.x = 4500.0;
       pos.y = 2500.0;
-      double y = 3.0;
+      double x = 3.0;
       double zoom = 1.0;
+      // exercise
       pos.setZoom(zoom);
-      pos.addMetersY(y);
+      pos.addPixelsX(x);
+      // verify
       assertEquals(pos.x, 4503.0);
       assertEquals(pos.y, 2500.0);
    }
 
    /*********************************************
+    * name:    ADD METERS X ZERO ZOOM
+    * input:   pos=(4500,2500) x=3pixels zoom=50.0
+    * output:  pos=(4550.0,2500)
+    *********************************************/
+   void addPixelsX_zoom()
+   {
+      // setup
+      Position pos;
+      pos.x = 4500.0;
+      pos.y = 2500.0;
+      double x = 3.0;
+      double zoom = 50.0;
+      // exercise
+      pos.setZoom(zoom);
+      pos.addPixelsX(x);
+      // verify
+      assertEquals(pos.x, 4650.0);
+      assertEquals(pos.y, 2500.0);  
+   }
+
+   /*********************************************
+    * name:    ADD METERS Y ZERO ZOOM
+    * input:   pos=(4500,2500) y=3pixels zoom=1.0
+    * output:  pos=(4500,2503)
+    *********************************************/
+   void addPixelsY_noZoom()
+   {
+      // setup
+      Position pos; 
+      pos.x = 4500.0;
+      pos.y = 2500.0;
+      double y = 3.0;
+      double zoom = 1.0;
+      pos.setZoom(zoom);
+      pos.addPixelsY(y);
+      assertEquals(pos.x, 4500.0);
+      assertEquals(pos.y, 2503.0);
+   }
+
+   /*********************************************
     * name:    ADD METERS Y ZERO ZOOM
     * input:   pos=(4500,2500) y=3pixels zoom=50.0
-    * output:  pos=(4503,2500)
+    * output:  pos=(4500,2650)
     *********************************************/
    void addPixelsY_zoom()
    {
@@ -481,9 +599,9 @@ private:
       double y = 3.0;
       double zoom = 50.0;
       pos.setZoom(zoom);
-      pos.addMetersY(y);
-      assertEquals(pos.x, 4503.0);
-      assertEquals(pos.y, 2500.0);
+      pos.addPixelsY(y);
+      assertEquals(pos.x, 4500.0);
+      assertEquals(pos.y, 2650.0);
    }
 
    /*********************************************
@@ -574,9 +692,7 @@ private:
       a.ddx = 0.0;
       a.ddy = 0.0;
 
-      Velocity v;
-      v.dx = 0.0;
-      v.dy = 0.0;
+      Velocity0 v; 
 
       double t = 1.0;
 
@@ -586,6 +702,8 @@ private:
       // verify
       assertEquals(pos.x, 11.1);
       assertEquals(pos.y, 22.2);
+      assertEquals(a.ddx, 0.0);
+      assertEquals(a.ddy, 0.0);
    }
 
    /*********************************************

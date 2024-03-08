@@ -48,10 +48,11 @@ public:
    double getZoom()          const { return metersFromPixels; }
 
    // setters
-   void setZoom(double metersFromPixels) {this->metersFromPixels = metersFromPixels;} // ?
-   void setMeters(double xMeters, double yMeters) { this->metersFromPixels = metersFromPixels; }
-   void setMetersX(double xMeters)       { x = xMeters;                    }
-   void setMetersY(double yMeters)       { y = yMeters;                    }
+   // meters = pixels / zoom
+   void setZoom(double metersFromPixels) {this->metersFromPixels = metersFromPixels;}
+   void setMeters(double xMeters, double yMeters) {  }
+   void setMetersX(double xMeters)       { x = xMeters; }
+   void setMetersY(double yMeters)       { y = yMeters; }
    void setPixelsX(double xPixels)       { x = xPixels * metersFromPixels; }
    void setPixelsY(double yPixels)       { y = yPixels * metersFromPixels; }
    void addMetersX(double x)             { setMetersX(getMetersX() + x);   }
@@ -65,7 +66,6 @@ public:
 private:
    double x;                 // horizontal position
    double y;                 // vertical position
-   double zoom;              // do we need this?
    static double metersFromPixels;
 };
 
