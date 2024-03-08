@@ -22,30 +22,30 @@ public:
    void run()
    {
       // // Ticket 5: From before
-      // constructor_default();
-      // constructor_nonDefault();
-      // getDX();
-      // getDY();
-      // getSpeed_up();
-      // getSpeed_down();
-      // getSpeed_left();
-      // getSpeed_right();
-      // getSpeed_diagonal();
-      // setDX();
-      // setDY();
-      // set_up();
-      // set_down();
-      // set_left();
-      // set_right();
-      // set_diagonal();
-      // addDX_zero();
-      // addDX_value();
-      // addDY_zero();
-      // addDY_value();
-      // add_stationary();
-      // add_noTime();
-      // add_moving4Seconds();
-      // add_moving1Second();
+      constructor_default();
+      constructor_nonDefault();
+      getDX();
+      getDY();
+      getSpeed_up();
+      getSpeed_down();
+      getSpeed_left();
+      getSpeed_right();
+      getSpeed_diagonal();
+      setDX();
+      setDY();
+      set_up();
+      set_down();
+      set_left();
+      set_right();
+      set_diagonal();
+      addDX_zero();
+      addDX_value();
+      addDY_zero();
+      addDY_value();
+      add_stationary();
+      add_noTime();
+      add_moving4Seconds();
+      add_moving1Second();
 
       // // Ticket 6: Reverse and add
       // reverse_stationary();
@@ -613,7 +613,7 @@ private:
       double t = 0.0;
 
       // exercise
-      v.add(a, t);
+      v.addAcceleration(a, t);
 
       // verify
       assertEquals(v.dx, 2.3);
@@ -639,7 +639,7 @@ private:
       double t = 0.0;
 
       // exercise
-      v.add(a, t);
+      v.addAcceleration(a, t);
 
       // verify
       assertEquals(v.dx, 2.3);
@@ -665,7 +665,7 @@ private:
       double t = 1.0;
 
       // exercise
-      v.add(a, t);
+      v.addAcceleration(a, t);
 
       // verify
       assertEquals(v.dx, 8.3);  // 2.3 + 6.0*1
@@ -691,7 +691,7 @@ private:
       double t = 4.0;
 
       // exercise
-      v.add(a, t);
+      v.addAcceleration(a, t);
 
       // verify
       assertEquals(v.dx, 14.3); // 2.3 + 3.0*4

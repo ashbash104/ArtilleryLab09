@@ -14,15 +14,37 @@
 #include <math.h>  // for sqrt()
 #include <cassert>
 
+
+ /******************************************
+  * VELOCITY : CONSTRUCTOR WITH SPEED, ANGLE
+  * Initialize velocity using the passed speed
+  * and angle
+  *****************************************/
+Velocity::Velocity(double speed, Angle angle)
+{
+   dx = sin(angle.getRadians()) * speed;
+   dy = cos(angle.getRadians()) * speed;
+}
+
 /*********************************************
  * VELOCITY : ADD
  *  v = v_0 + a t
  *********************************************/
-void Velocity::add(const Acceleration& acceleration, double time)
+void Velocity::addAcceleration(const Acceleration& a, double time)
 {
-
+   dx += a.getDDX() * time;
+   dy += a.getDDY() * time;
 }
 
+/*********************************************
+ * VELOCITY : ADD VELOCITY
+ * vector addition
+ *********************************************/
+void Velocity::addVelocity(const Velocity& v)
+{
+   dx += v.getDX();
+   dy += v.getDY();
+}
 
 /*********************************************
  * VELOCITY : GET SPEED
@@ -30,7 +52,7 @@ void Velocity::add(const Acceleration& acceleration, double time)
  *********************************************/
 double Velocity::getSpeed() const
 {
-   return 9.9;
+   return sqrt((dx * dx) + (dy * dy));
 }
 
 /*********************************************
@@ -48,7 +70,8 @@ double Velocity::getSpeed() const
  *********************************************/
 void Velocity::set(const Angle & angle, double magnitude)
 {
-
+   dx = magnitude * sin(angle.getRadians()); 
+   dy = magnitude * cos(angle.getRadians()); 
 }
 
 

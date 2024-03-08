@@ -32,7 +32,7 @@ void AccelerationDummy::set(const Angle& a, double magnitude)
   * ACCELERATION : ADD
   *  a += a
   *********************************************/
-void Acceleration::add(const Acceleration& acceleration)
+void Acceleration::addAcceleration(const Acceleration& acceleration)
 {
    ddx += acceleration.ddx;
    ddy += acceleration.ddy;

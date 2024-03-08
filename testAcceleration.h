@@ -417,7 +417,7 @@ private:
        b.ddx = 0.0;
        b.ddy = 0.0;
       // exercise
-      a.add(b);
+      a.addAcceleration(b);
 
       // verify
       assertEquals(a.ddx, 0.0);
@@ -443,7 +443,7 @@ private:
       b.ddy = 0.0;
 
       // exercise
-      a.add(b);
+      a.addAcceleration(b);
 
       // verify
       assertEquals(a.ddx, 1.1);
@@ -466,7 +466,7 @@ private:
       b.ddy = 7.7;
 
       // exercise
-      a.add(b);
+      a.addAcceleration(b);
 
       // verify
       assertEquals(a.ddx, 4.4);
@@ -490,7 +490,7 @@ private:
       b.ddy = 7.7;
 
       // exercise
-      a.add(b);
+      a.addAcceleration(b);
 
       // verify
       assertEquals(a.ddx, 5.5);

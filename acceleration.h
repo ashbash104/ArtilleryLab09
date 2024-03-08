@@ -45,7 +45,7 @@ public:
    virtual void set(const Angle & a, double magnitude);
    virtual void addDDX(double ddx) {this->ddx += ddx; }
    virtual void addDDY(double ddy) {this->ddy += ddy; }
-   virtual void add(const Acceleration& rhs);
+   virtual void addAcceleration(const Acceleration& rhs);
 
    // methods
    double computeDDX(double total, Angle angle);
