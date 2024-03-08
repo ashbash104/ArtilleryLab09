@@ -2,7 +2,7 @@
  * Header File:
  *    ACCELERATION 
  * Author:
- *    <your name here>
+ *    Ashlee Hart, Emily Raventos
  * Summary:
  *    Everything we need to know about acceleration
  ************************************************************************/
@@ -30,22 +30,22 @@ class Acceleration
 
 public:
    // constructors
-   Acceleration()                       : ddx(9.9), ddy(9.9) { }
-   Acceleration(double ddx, double ddy) : ddx(9.9), ddy(9.9) { }
+   Acceleration()                       : ddx(0.0), ddy(0.0) { }
+   Acceleration(double ddx, double ddy) : ddx(ddx), ddy(ddy) { }
    Acceleration(double a, Angle angle);
 
    // getters
-   virtual double getDDX()   const           { return 9.9;             }
-   virtual double getDDY()   const           { return 9.9;             }
+   virtual double getDDX()   const           { return ddx;             }
+   virtual double getDDY()   const           { return ddy;             }
    double getAcceleration() const;
 
    // setters                        
-   virtual void setDDX(double ddx)           {  }
-   virtual void setDDY(double ddy)           {  }
+   virtual void setDDX(double ddx)           { this->ddx = ddx; }
+   virtual void setDDY(double ddy)           { this->ddy = ddy;  }
    virtual void set(const Angle & a, double magnitude);
-   virtual void addDDX(double ddx) { }
-   virtual void addDDY(double ddy) { }
-   virtual void add(const Acceleration& rhs) { }
+   virtual void addDDX(double ddx) {this->ddx += ddx; }
+   virtual void addDDY(double ddy) {this->ddy += ddy; }
+   virtual void add(const Acceleration& rhs);
 
    // methods
    double computeDDX(double total, Angle angle);

@@ -2,7 +2,7 @@
  * Source File:
  *    ACCELERATION 
  * Author:
- *    <your name here>
+ *    Ashlee Hart, Emily Raventos
  * Summary:
  *    Everything we need to know about changing speed
  ************************************************************************/
@@ -20,9 +20,20 @@
  *********************************************/
 void Acceleration::set(const Angle & a, double magnitude)
 {
-   
+   ddx = sin(a.getRadians()) * magnitude;  // Does this need to be negative?
+   ddy = cos(a.getRadians()) * magnitude;
 }
 void AccelerationDummy::set(const Angle& a, double magnitude)
 {
    assert(false);
+}
+
+/*********************************************
+  * ACCELERATION : ADD
+  *  a += a
+  *********************************************/
+void Acceleration::add(const Acceleration& acceleration)
+{
+   ddx += acceleration.ddx;
+   ddy += acceleration.ddy;
 }
