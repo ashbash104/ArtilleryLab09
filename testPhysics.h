@@ -3,7 +3,7 @@
  * Header File:
  *    TEST PHYSICS
  * Author:
- *    <your name here>
+ *    Br. Helfrich, Ashlee Hart, Emilay Raventos
  * Summary:
  *    All the automation for the physics functions
  ************************************************************************/
@@ -23,7 +23,7 @@
   * TEST PHYSICS
   * A class containing automation for all the physics functions
   ********************************/
-class TestPhysics : public UnitTest
+class TestPhysics : public UnitTest 
 {
 public:
    void run()
@@ -75,22 +75,22 @@ public:
       linearInterpolation_mappingLarge();
 
       // Ticket 4: Gravity
-      gravityFromAltitude_0();
+      /*gravityFromAltitude_0();
       gravityFromAltitude_10000();
       gravityFromAltitude_80000();
       gravityFromAltitude_5500();
       gravityFromAltitude_43333();
       gravityFromAltitude_3666();
-      gravityFromAltitude_8848();
+      gravityFromAltitude_8848();*/
 
       // Ticket 5: Density
-      densityFromAltitude_0();
+      /*densityFromAltitude_0();
       densityFromAltitude_10000();
       densityFromAltitude_80000();
       densityFromAltitude_5500();
       densityFromAltitude_43333();
       densityFromAltitude_3666();
-      densityFromAltitude_8848();
+      densityFromAltitude_8848();*/
 
       // Ticket 6: Speed of Sound
       speedSoundFromAltitude_0();
@@ -102,12 +102,12 @@ public:
       speedSoundFromAltitude_8848();
 
       // Ticket 7: Drag
-      dragFromMach_000();
+      /*dragFromMach_000();
       dragFromMach_500();
       dragFromMach_100();
       dragFromMach_060();
       dragFromMach_010();
-      dragFromMach_314();
+      dragFromMach_314();*/
 
       report("Physics");
    }

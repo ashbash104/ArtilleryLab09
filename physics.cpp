@@ -2,12 +2,16 @@
  * Source File:
  *    PHYSICS
  * Author:
- *    <your name here>
+ *    Br. Helfrich, Ashlee Hart, Emilay Raventos
  * Summary:
  *    Laws of motion, effects of gravity, wind resistence, etc.
  ************************************************************************/
 
 #include "physics.h"  // for the prototypes
+#include <map>          // for linear interpolation
+#include <math.h>       // for PI, sin, and cos
+
+
 
  /*********************************************************
  * LINEAR INTERPOLATION
@@ -15,8 +19,39 @@
  *********************************************************/
 double linearInterpolation(const Mapping mapping[], int numMapping, double domain)
 {
-   return -99.9;
+   //return y0 + ((domain - x0) * (y1 - y0)) / (x1 - x0); // I'm not sure how to make this work.
+   return 0.0;
 }
+
+/*********************************
+* LOOKUP VALUE
+* If above is long double then this needs to be too
+********************************/
+double lookupValue(const std::map<double, double>& table, const double& value)
+{
+   if (value < table.begin()->first)
+   {
+      return table.begin()->second;
+   }
+   else if (value > table.rbegin()->first)
+   {
+      return table.rbegin()->second;
+   }
+
+   for (auto i = table.begin(); i != table.end(); i++)
+   {
+      if (i->first == value)
+      {
+         return i->second;
+      }
+      else if (i->first > value)
+      {
+         // ---> allows you to pass an array as an argument supposedly. 
+         return linearInterpolation(i->first, i->second, i--->first, i->second, value);
+      }
+   }
+   return 0.0;
+} 
 
 /*********************************************************
  * GRAVITY FROM ALTITUDE
@@ -24,7 +59,14 @@ double linearInterpolation(const Mapping mapping[], int numMapping, double domai
  *********************************************************/
 double gravityFromAltitude(double altitude)
 {
-   return -99.9;
+   std::map<double, double> const gravityChart
+   {
+         {    0.0, 9.807}, { 1000.0, 9.804}, { 2000.0, 9.801}, { 3000.0, 9.797},
+         { 4000.0, 9.794}, { 5000.0, 9.791}, { 6000.0, 9.788}, { 7000.0, 9.785},
+         { 8000.0, 9.782}, { 9000.0, 9.779}, {10000.0, 9.776}, {15000.0, 9.761},
+         {20000.0, 9.745}, {25000.0, 9.730}
+   };
+   return lookupValue(gravityChart, altitude); 
 }
 
 /*********************************************************
@@ -33,7 +75,15 @@ double gravityFromAltitude(double altitude)
  *********************************************************/
 double densityFromAltitude(double altitude)
 {
-   return -99.9;
+   std::map<double, double> const densityChart
+   {
+         {    0.0, 1.2250000}, { 1000.0, 1.1120000}, { 2000.0, 1.0070000}, { 3000.0, 0.9093000},
+         { 4000.0, 0.8194000}, { 5000.0, 0.7364000}, { 6000.0, 0.6601000}, { 7000.0, 0.5900000},
+         { 8000.0, 0.5258000}, { 9000.0, 0.4671000}, {10000.0, 0.4135000}, {15000.0, 0.1948000},
+         {20000.0, 0.0889100}, {25000.0, 0.0400800}, {30000.0, 0.0184100}, {40000.0, 0.0039960},
+         {50000.0, 0.0010270}, {60000.0, 0.0003097}, {70000.0, 0.0000828}, {80000.0, 0.0000185}
+   };
+   return lookupValue(densityChart, altitude); 
 }
 
 /*********************************************************
@@ -42,7 +92,14 @@ double densityFromAltitude(double altitude)
  ********************************************************/
 double speedSoundFromAltitude(double altitude)
 {
-   return -99.9;
+   std::map<double, double> const soundChart
+   {
+         {    0.0, 340.0}, { 1000.0, 336.0}, { 2000.0, 332.0}, { 3000.0, 328.0},
+         { 4000.0, 324.0}, { 5000.0, 320.0}, { 6000.0, 316.0}, { 7000.0, 312.0},
+         { 8000.0, 308.0}, { 9000.0, 303.0}, {10000.0, 299.0}, {15000.0, 295.0},
+         {20000.0, 295.0}, {25000.0, 295.0}, {30000.0, 305.0}, {40000.0, 324.0}
+   };
+   return lookupValue(soundChart, altitude); 
 }
 
 
@@ -52,6 +109,13 @@ double speedSoundFromAltitude(double altitude)
  *********************************************************/
 double dragFromMach(double speedMach)
 {
-   return -99.9;
+   std::map<double, double> const dragChart
+   {
+      {0.300, 0.1629}, {0.500, 0.1659}, {0.700, 0.2031}, {0.890, 0.2597},
+      {0.920, 0.3010}, {0.960, 0.3287}, {0.980, 0.4002}, {1.000, 0.4258},
+      {1.020, 0.4335}, {1.060, 0.4483}, {1.240, 0.4064}, {1.530, 0.3663},
+      {1.990, 0.2897}, {2.870, 0.2297}, {2.890, 0.2306}, {5.000, 0.2656}
+   };
+   return lookupValue(dragChart, speedMach);
 }
 
