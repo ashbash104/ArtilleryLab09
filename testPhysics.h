@@ -102,7 +102,7 @@ public:
       speedSoundFromAltitude_8848();
 
       // Ticket 7: Drag
-      dragFromMach_000(); // drag is 0.0 instead of 0.2
+      dragFromMach_000(); // drag is 0.0 instead of 0.2. Is the header comment wrong?
       dragFromMach_500();
       dragFromMach_100();
       dragFromMach_060();
