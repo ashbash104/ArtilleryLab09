@@ -110,12 +110,12 @@ struct Mapping
  *********************************************************/
 double linearInterpolation(const Mapping mapping[], int numMapping, double domain);
 
-
-/*********************************************************
- * LOOKUP
- * From a map of domains and ranges, linear interpolate
- *********************************************************/
-double linearInterpolation(const std::map<double, double>& table, const double& value);
+//
+///*********************************************************
+// * LOOKUP
+// * From a map of domains and ranges, linear interpolate
+// *********************************************************/
+//double linearInterpolation(const std::map<double, double>& table, const double& value);
 
 /*********************************************************
  * GRAVITY FROM ALTITUDE

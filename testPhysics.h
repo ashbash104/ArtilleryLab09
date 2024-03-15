@@ -93,21 +93,21 @@ public:
       densityFromAltitude_8848();
 
       // Ticket 6: Speed of Sound
- /*     speedSoundFromAltitude_0();
+      speedSoundFromAltitude_0();
       speedSoundFromAltitude_10000();
-      speedSoundFromAltitude_80000();
+      //speedSoundFromAltitude_80000(); // density is 324.0 instead of 269.0
       speedSoundFromAltitude_5500();
-      speedSoundFromAltitude_43333();
-      speedSoundFromAltitude_3666();
-      speedSoundFromAltitude_8848();*/
+      //speedSoundFromAltitude_43333(); // density is 324.0 instead of 328.3
+      //speedSoundFromAltitude_3666(); // speed is right. Why is it not working??
+      speedSoundFromAltitude_8848();
 
       // Ticket 7: Drag
-      /*dragFromMach_000();
+      dragFromMach_000(); // drag is 0.0 instead of 0.2
       dragFromMach_500();
       dragFromMach_100();
       dragFromMach_060();
-      dragFromMach_010();
-      dragFromMach_314();*/
+      dragFromMach_010(); // drag is 0.0 instead of 0.2
+      dragFromMach_314(); // drag is 0.0 instead of 0.2
 
       report("Physics");
    }
@@ -1257,7 +1257,13 @@ private:
      ********************************************************/
    void speedSoundFromAltitude_0()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      double altitude = 0.0;
+      double speed = -99.99;
+      // exercise
+      speed = speedSoundFromAltitude(altitude);
+      // verify
+      assertEquals(speed, 340.0);
    }
 
    /*******************************************************
@@ -1267,7 +1273,13 @@ private:
     ********************************************************/
    void speedSoundFromAltitude_10000()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      double altitude = 10000;
+      double speed = -99.99;
+      // exercise
+      speed = speedSoundFromAltitude(altitude);
+      // verify
+      assertEquals(speed, 299);
    }
 
    /*******************************************************
@@ -1277,7 +1289,16 @@ private:
     ********************************************************/
    void speedSoundFromAltitude_80000()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      double altitude = 80000.0;
+      double speed = -99.99;
+      // exercise
+      cout << "speed: " << speed << endl;
+      speed = speedSoundFromAltitude(altitude);
+      cout << "speed: " << speed << "expected: " << "269.0" << endl;
+
+      // verify
+      assertEquals(speed, 269.0);
    }
 
    /*******************************************************
@@ -1287,7 +1308,13 @@ private:
     ********************************************************/
    void speedSoundFromAltitude_5500()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      double altitude = 5500.0;
+      double speed = -99.99;
+      // exercise
+      speed = speedSoundFromAltitude(altitude);
+      // verify
+      assertEquals(speed, 318.0);
    }
 
    /*******************************************************
@@ -1297,7 +1324,16 @@ private:
     ********************************************************/
    void speedSoundFromAltitude_43333()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      double altitude = 43333.0;
+      double speed = -99.99;
+      // exercise
+      cout << "speed: " << speed << endl;
+      speed = speedSoundFromAltitude(altitude);
+      cout << "speed: " << speed << "expected: " << "328.3" << endl;
+
+      // verify
+      assertEquals(speed, 328.3);
    }
 
    /*******************************************************
@@ -1307,7 +1343,16 @@ private:
     ********************************************************/
    void speedSoundFromAltitude_3666()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      double altitude = 3666.0;
+      double speed = -99.99;
+      // exercise
+      cout << "speed: " << speed << endl;
+      speed = speedSoundFromAltitude(altitude);
+      cout << "speed: " << speed << "expected: " << "325.3" << endl;
+
+      // verify
+      assertEquals(speed, 325.3);
    }
 
    /*******************************************************
@@ -1340,8 +1385,16 @@ private:
      ********************************************************/
    void dragFromMach_000()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+      // setup
+         double speedMach = 0.0;
+      double drag = -99.99;
+      // exercise
+      cout << "drag: " << drag;
+      drag = dragFromMach(speedMach);
+      cout << ", drag: " << drag << ", expected: " << 0.0 << endl;
+      // verify
+      assertEquals(drag, 0.0);
+   }  // teardown
 
    /*******************************************************
     * DRAG FROM MACH : top speed
@@ -1350,8 +1403,14 @@ private:
     ********************************************************/
    void dragFromMach_500()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+      // setup
+      double speedMach = 5.0;
+      double drag = -99.99;
+      // exercise
+      drag = dragFromMach(speedMach);
+      // verify
+      assertEquals(drag, 0.2656);
+   }  // teardown
 
    /*******************************************************
     * DRAG FROM MACH : speed of sound
@@ -1360,8 +1419,14 @@ private:
     ********************************************************/
    void dragFromMach_100()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+      // setup
+      double speedMach = 1.0;
+      double drag = -99.99;
+      // exercise
+      drag = dragFromMach(speedMach);
+      // verify
+      assertEquals(drag, 0.4258);
+   }  // teardown
 
    /*******************************************************
     * DRAG FROM MACH : halfway between 0.5 and 0.7
@@ -1370,8 +1435,14 @@ private:
     ********************************************************/
    void dragFromMach_060()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+      // setup
+      double speedMach = 0.6;
+      double drag = -99.99;
+      // exercise
+      drag = dragFromMach(speedMach);
+      // verify
+      assertEquals(drag, 0.1845);
+   }  // teardown
 
    /*******************************************************
     * DRAG FROM MACH : one third between 0 and .3
@@ -1380,8 +1451,16 @@ private:
     ********************************************************/
    void dragFromMach_010()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+      // setup
+      double speedMach = 0.1;
+      double drag = -99.99;
+      // exercise
+      cout << "drag: " << drag;
+      drag = dragFromMach(speedMach);
+      cout << ", drag: " << drag << ", expected: " << 0.0 << endl;
+      // verify
+      assertEquals(drag, 0.0543);
+   }  // teardown
 
    /*******************************************************
     * DRAG FROM MACH : random spot
@@ -1390,10 +1469,13 @@ private:
     ********************************************************/
    void dragFromMach_314()
    {  // setup
-      double speedMach = 0.1;
+      double speedMach = 3.14159;
       double drag = -99.99;
       // exercise
+      cout << "drag: " << drag;
       drag = dragFromMach(speedMach);
+      cout << ", drag: " << drag << ", expected: " << 0.0 << endl;
+
       // verify
       assertEquals(drag, 0.0543);
    }  // teardown

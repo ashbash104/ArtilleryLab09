@@ -41,34 +41,34 @@ double linearInterpolation(const Mapping mapping[], int numMapping, double domai
    return interpolatedRange;
 }
 
-/*********************************
-* LOOKUP VALUE
-********************************/
-double linearInterpolation(const std::map<double, double>& table, const double& value)
-{
-   if (value < table.begin()->first)
-   {
-      return table.begin()->second;
-   }
-   else if (value > table.rbegin()->first)
-   {
-      return table.rbegin()->second;
-   }
-
-   for (auto i = table.begin(); i != table.end(); i++)
-   {
-      if (i->first == value)
-      {
-         return i->second;
-      }
-      else if (i->first > value)
-      {
-         // ---> allows you to pass an array as an argument supposedly. 
-         return linearInterpolation(i->first, i->second, i--->first, i->second, value);
-      }
-   }
-   return 0.0;
-} 
+///*********************************
+//* LOOKUP VALUE
+//********************************/
+//double linearInterpolation(const std::map<double, double>& table, const double& value)
+//{
+//   if (value < table.begin()->first)
+//   {
+//      return table.begin()->second;
+//   }
+//   else if (value > table.rbegin()->first)
+//   {
+//      return table.rbegin()->second;
+//   }
+//
+//   for (auto i = table.begin(); i != table.end(); i++)
+//   {
+//      if (i->first == value)
+//      {
+//         return i->second;
+//      }
+//      else if (i->first > value)
+//      {
+//         // ---> allows you to pass an array as an argument supposedly. 
+//         return linearInterpolation(i->first, i->second, i--->first, i->second, value);
+//      }
+//   }
+//   return 0.0;
+//} 
 
 /*********************************************************
  * GRAVITY FROM ALTITUDE
@@ -85,21 +85,21 @@ double gravityFromAltitude(double altitude)
    };
 
    // If we don't want to use our lookupValue method then we need to convert this chart to an array of maps
-   //// Convert the std::map to an array of Mapping structures
-   //Mapping gravityMapping[14];
-   //int index = 0;
-   //for (const auto& entry : gravityChart)
-   //{
-   //   gravityMapping[index].domain = entry.first;
-   //   gravityMapping[index].range = entry.second;
-   //   ++index;
-   //}
+   // Convert the std::map to an array of Mapping structures
+   Mapping gravityMapping[14]; // this is a hard coded number, which isn't ideal. I couldn't get size() or sizeof() to work though.
+   int index = 0;
+   for (const auto& entry : gravityChart)
+   {
+      gravityMapping[index].domain = entry.first;
+      gravityMapping[index].range = entry.second;
+      ++index;
+   }
 
-   //// Perform linear interpolation
-   //return linearInterpolation(gravityMapping, sizeof(gravityMapping) / sizeof(gravityMapping[0]), altitude);
+   // Perform linear interpolation
+   return linearInterpolation(gravityMapping, sizeof(gravityMapping) / sizeof(gravityMapping[0]), altitude);
 
    // using our old lookupValue function
-   return linearInterpolation(gravityChart, altitude);
+   //return linearInterpolation(gravityChart, altitude);
 }
 
 /*********************************************************
@@ -117,20 +117,20 @@ double densityFromAltitude(double altitude)
          {50000.0, 0.0010270}, {60000.0, 0.0003097}, {70000.0, 0.0000828}, {80000.0, 0.0000185}
    };
 
-   //// Convert the std::map to an array of Mapping structures
-   //Mapping densityMapping[20];
-   //int index = 0;
-   //for (const auto& entry : densityChart)
-   //{
-   //   densityMapping[index].domain = entry.first;
-   //   densityMapping[index].range = entry.second;
-   //   ++index;
-   //}
+   // Convert the std::map to an array of Mapping structures
+   Mapping densityMapping[20]; // this is a hard coded number, which isn't ideal. I couldn't get size() or sizeof() to work though.
+   int index = 0;
+   for (const auto& entry : densityChart)
+   {
+      densityMapping[index].domain = entry.first;
+      densityMapping[index].range = entry.second;
+      ++index;
+   }
 
-   //// Perform linear interpolation
-   //return linearInterpolation(densityMapping, sizeof(densityMapping) / sizeof(densityMapping[0]), altitude);
+   // Perform linear interpolation
+   return linearInterpolation(densityMapping, sizeof(densityMapping) / sizeof(densityMapping[0]), altitude);
 
-   return linearInterpolation(densityChart, altitude); 
+   //return linearInterpolation(densityChart, altitude); 
 }
 
 /*********************************************************
@@ -146,7 +146,21 @@ double speedSoundFromAltitude(double altitude)
          { 8000.0, 308.0}, { 9000.0, 303.0}, {10000.0, 299.0}, {15000.0, 295.0},
          {20000.0, 295.0}, {25000.0, 295.0}, {30000.0, 305.0}, {40000.0, 324.0}
    };
-   return linearInterpolation(soundChart, altitude); 
+
+   // Convert the std::map to an array of Mapping structures
+   Mapping soundMapping[16]; // this is a hard coded number, which isn't ideal. I couldn't get size() or sizeof() to work though.
+   int index = 0;
+   for (const auto& entry : soundChart)
+   {
+      soundMapping[index].domain = entry.first;
+      soundMapping[index].range = entry.second;
+      ++index;
+   }
+
+   // Perform linear interpolation
+   return linearInterpolation(soundMapping, sizeof(soundMapping) / sizeof(soundMapping[0]), altitude);
+
+   //return linearInterpolation(soundChart, altitude); 
 }
 
 
@@ -163,6 +177,20 @@ double dragFromMach(double speedMach)
       {1.020, 0.4335}, {1.060, 0.4483}, {1.240, 0.4064}, {1.530, 0.3663},
       {1.990, 0.2897}, {2.870, 0.2297}, {2.890, 0.2306}, {5.000, 0.2656}
    };
-   return linearInterpolation(dragChart, speedMach);
+
+   // Convert the std::map to an array of Mapping structures
+   Mapping dragMapping[16]; // this is a hard coded number, which isn't ideal. I couldn't get size() or sizeof() to work though.
+   int index = 0;
+   for (const auto& entry : dragChart)
+   {
+      dragMapping[index].domain = entry.first;
+      dragMapping[index].range = entry.second;
+      ++index;
+   }
+
+   // Perform linear interpolation
+   return linearInterpolation(dragMapping, sizeof(dragMapping) / sizeof(dragMapping[0]), speedMach);
+
+   //return linearInterpolation(dragChart, speedMach);
 }
 
