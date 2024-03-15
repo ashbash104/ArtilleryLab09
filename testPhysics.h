@@ -59,7 +59,7 @@ public:
       velocityFromAcceleration_twoTime();
 
       // Ticket 2: Linear Interpolation equation
-      //linearInterpolation_coordinatesZero(); //  should be working
+      //linearInterpolation_coordinatesZero(); //  value is correct, but there's a debug error. 
       linearInterpolation_coordinatesOne();
       linearInterpolation_coordinatesMiddle();
       linearInterpolation_coordinatesTop();
@@ -70,7 +70,7 @@ public:
       linearInterpolation_mappingTwo();
       linearInterpolation_mappingMid01();
       linearInterpolation_mappingTop01();
-      //linearInterpolation_mappinglower23(); // r is 5.4 instead of 5.5
+      //linearInterpolation_mappinglower23(); // r is 5.4 instead of 5.5. We might need a closeEnough() function
       linearInterpolation_mappingSmall();
       linearInterpolation_mappingLarge();
 
@@ -95,10 +95,10 @@ public:
       // Ticket 6: Speed of Sound
       speedSoundFromAltitude_0();
       speedSoundFromAltitude_10000();
-      //speedSoundFromAltitude_80000(); // density is 324.0 instead of 269.0
+      speedSoundFromAltitude_80000(); // density is 324.0 instead of 269.0
       speedSoundFromAltitude_5500();
-      //speedSoundFromAltitude_43333(); // density is 324.0 instead of 328.3
-      //speedSoundFromAltitude_3666(); // speed is right. Why is it not working??
+      speedSoundFromAltitude_43333(); // density is 324.0 instead of 328.3
+      speedSoundFromAltitude_3666(); // speed is right. Why is it not working??
       speedSoundFromAltitude_8848();
 
       // Ticket 7: Drag
@@ -623,7 +623,9 @@ private:
       double r = -999.99;
       // exercise
       // r0 + (r1 - r0) * (d - d0) / (d1 - d0)
+      cout << "r: " << r;
       r = linearInterpolation(d0, r0, d1, r1, d); // 0.0 + (8.0 - 0.0) * (0.0 - 0.0) / (8.0 - 0.0) = 0.0
+      cout << ", r: " << r << ", expected: " << 0.0;
       // verify
       assert(r, 0.0);
    }
@@ -1185,10 +1187,10 @@ private:
       // setup
       double altitude = 55000.0;
       double density = -999.999;
-      cout << "altitude: " << altitude << ", density: " << density << endl;
+      cout << " density: " << density;
       // exercise
       density = densityFromAltitude(altitude);
-      cout << "altitude: " << altitude << ", density: " << density << endl;
+      cout << ", new density: " << density << endl;
 
       // verify
       assertEquals(density, 0.69825);
@@ -1293,9 +1295,9 @@ private:
       double altitude = 80000.0;
       double speed = -99.99;
       // exercise
-      cout << "speed: " << speed << endl;
+      cout << "speed: " << speed;
       speed = speedSoundFromAltitude(altitude);
-      cout << "speed: " << speed << "expected: " << "269.0" << endl;
+      cout << ", new speed: " << speed << " expected: " << "269.0" << endl;
 
       // verify
       assertEquals(speed, 269.0);
@@ -1328,9 +1330,9 @@ private:
       double altitude = 43333.0;
       double speed = -99.99;
       // exercise
-      cout << "speed: " << speed << endl;
+      cout << "speed: " << speed;
       speed = speedSoundFromAltitude(altitude);
-      cout << "speed: " << speed << "expected: " << "328.3" << endl;
+      cout << ", new speed: " << speed << " expected: " << "328.3" << endl;
 
       // verify
       assertEquals(speed, 328.3);
@@ -1347,9 +1349,9 @@ private:
       double altitude = 3666.0;
       double speed = -99.99;
       // exercise
-      cout << "speed: " << speed << endl;
+      cout << "speed: " << speed;
       speed = speedSoundFromAltitude(altitude);
-      cout << "speed: " << speed << "expected: " << "325.3" << endl;
+      cout << ", new speed: " << speed << " expected: " << "325.3" << endl;
 
       // verify
       assertEquals(speed, 325.3);
@@ -1391,7 +1393,7 @@ private:
       // exercise
       cout << "drag: " << drag;
       drag = dragFromMach(speedMach);
-      cout << ", drag: " << drag << ", expected: " << 0.0 << endl;
+      cout << ", new drag: " << drag << " expected: " << 0.0 << endl;
       // verify
       assertEquals(drag, 0.0);
    }  // teardown
@@ -1457,7 +1459,7 @@ private:
       // exercise
       cout << "drag: " << drag;
       drag = dragFromMach(speedMach);
-      cout << ", drag: " << drag << ", expected: " << 0.0 << endl;
+      cout << ", new drag: " << drag << " expected: " << 0.0 << endl;
       // verify
       assertEquals(drag, 0.0543);
    }  // teardown
@@ -1474,7 +1476,7 @@ private:
       // exercise
       cout << "drag: " << drag;
       drag = dragFromMach(speedMach);
-      cout << ", drag: " << drag << ", expected: " << 0.0 << endl;
+      cout << ", new drag: " << drag << " expected: " << 0.0 << endl;
 
       // verify
       assertEquals(drag, 0.0543);
