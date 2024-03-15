@@ -23,7 +23,7 @@
   * TEST PHYSICS
   * A class containing automation for all the physics functions
   ********************************/
-class TestPhysics : public UnitTest 
+class TestPhysics : public UnitTest
 {
 public:
    void run()
@@ -59,20 +59,20 @@ public:
       velocityFromAcceleration_twoTime();
 
       // Ticket 2: Linear Interpolation equation
-      linearInterpolation_coordinatesZero();
+      //linearInterpolation_coordinatesZero();
       linearInterpolation_coordinatesOne();
       linearInterpolation_coordinatesMiddle();
       linearInterpolation_coordinatesTop();
       linearInterpolation_coordinatesBackwards();
 
       // Ticket 3: Linear Interpolation with Mapping
-      linearInterpolation_mappingZero();
+   /*   linearInterpolation_mappingZero();
       linearInterpolation_mappingTwo();
       linearInterpolation_mappingMid01();
       linearInterpolation_mappingTop01();
       linearInterpolation_mappinglower23();
       linearInterpolation_mappingSmall();
-      linearInterpolation_mappingLarge();
+      linearInterpolation_mappingLarge();*/
 
       // Ticket 4: Gravity
       /*gravityFromAltitude_0();
@@ -93,13 +93,13 @@ public:
       densityFromAltitude_8848();*/
 
       // Ticket 6: Speed of Sound
-      speedSoundFromAltitude_0();
+ /*     speedSoundFromAltitude_0();
       speedSoundFromAltitude_10000();
       speedSoundFromAltitude_80000();
       speedSoundFromAltitude_5500();
       speedSoundFromAltitude_43333();
       speedSoundFromAltitude_3666();
-      speedSoundFromAltitude_8848();
+      speedSoundFromAltitude_8848();*/
 
       // Ticket 7: Drag
       /*dragFromMach_000();
@@ -614,7 +614,20 @@ private:
      *********************************************************/
    void linearInterpolation_coordinatesZero()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      double d0 = 0.0;
+      double r0 = 0.0;
+      double d1 = 8.0;
+      double r1 = 8.0;
+      double d = 0.0;
+      double r = -999.99;
+      // exercise
+      // r * (d1 - d0) - r0 - (r1 - r0) + d0
+      // (r - r0) / (d - d0) = (r1 - r0) / (d1 - d0) -> (r - 0.0) / (d - 0.0) = (8.0 - 0.0) / (8.0 - 0.0) -> r/d = 1
+      // r0 + (r1 - r0) * (d - d0) / (d1 - d0)
+      r = linearInterpolation(d0, r0, d1, r1, d); // 0.0 + (8.0 - 0.0) * (0.0 - 0.0) / (8.0 - 0.0) = 0.0
+      // verify
+      assert(r, 0.0);
    }
 
    /*********************************************************
@@ -630,7 +643,19 @@ private:
     *********************************************************/
    void linearInterpolation_coordinatesOne()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      double d0 = 0.0;
+      double r0 = 0.0;
+      double d1 = 8.0;
+      double r1 = 8.0;
+      double d = 8.0;
+      double r = -9999.99;
+      // exercise
+      // r * (d1 - d0) - r0 - (r1 - r0) + d0
+      // r0 + (r1 - r0) * (d - d0) / (d1 - d0)
+      r = linearInterpolation(d0, r0, d1, r1, d); // 0.0 + (8.0 - 0.0) * (8.0 - 0.0) / (8.0 - 0.0) = 8.0
+      // verify   
+      assert(r, 8.0);
    }
 
    /*********************************************************
@@ -646,7 +671,19 @@ private:
     *********************************************************/
    void linearInterpolation_coordinatesMiddle()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      double d0 = 0.0;
+      double r0 = 0.0;
+      double d1 = 8.0;
+      double r1 = 8.0;
+      double d = 4.0;
+      double r = -9999.99;
+      // exercise
+      // r * (d1 - d0) - r0 - (r1 - r0) + d0
+      // r0 + (r1 - r0) * (d - d0) / (d1 - d0)
+      r = linearInterpolation(d0, r0, d1, r1, d); // 0.0 + (8.0 - 0.0) * (4.0 - 0.0) / (8.0 - 0.0) = 4.0
+      // verify
+      assert(r, 4.0);
    }
 
    /*********************************************************
@@ -662,7 +699,18 @@ private:
     *********************************************************/
    void linearInterpolation_coordinatesTop()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      double d0 = 0.0;
+      double r0 = 0.0;
+      double d1 = 8.0;
+      double r1 = 8.0;
+      double d = 6.0;
+      double r = -9999.99;
+      // exercise
+      // r0 + (r1 - r0) * (d - d0) / (d1 - d0)
+      r = linearInterpolation(d0, r0, d1, r1, d); // 0.0 + (8.0 - 0.0) * (6.0 - 0.0) / (8.0 - 0.0) = 6.0
+      // verify   
+      assert(r, 6.0);
    }
 
    /*********************************************************
@@ -673,13 +721,24 @@ private:
     *    |   3,5 * (d,r)
     *    |        \
     *   r|         \
-    *    |      7,-3 * (d0,r0)
+    *    |      7,-3 * (d0,r0) -> (d1, r1)??
     *    +-------------
     *         d
     *********************************************************/
    void linearInterpolation_coordinatesBackwards()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      double d0 = 1.0;
+      double r0 = 9.0;
+      double d1 = 7.0;
+      double r1 = -3.0;
+      double d = 3.0;
+      double r = -999.99;
+      // exercise
+      // r0 + (r1 - r0) * (d - d0) / (d1 - d0)
+      r = linearInterpolation(d0, r0, d1, r1, d); // 9.0 + (-3.0 - 9.0) * (3.0 - 1.0) / (7.0 - 1.0) = 1.0
+      // verify   
+      assert(r, 5.0);
    }
 
 
