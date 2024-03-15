@@ -140,3 +140,7 @@ double speedSoundFromAltitude(double altitude);
  *********************************************************/
 double dragFromMach(double speedMach);
 
+template<typename T>
+const T& clamp(const T& value, const T& low, const T& high) {
+   return std::min(std::max(value, low), high);
+}
