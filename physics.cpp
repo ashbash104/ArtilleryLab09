@@ -2,7 +2,7 @@
  * Source File:
  *    PHYSICS
  * Author:
- *    Br. Helfrich, Ashlee Hart, Emilay Raventos
+ *    Br. Helfrich, Ashlee Hart, Emilay Raventos, chatGPT
  * Summary:
  *    Laws of motion, effects of gravity, wind resistence, etc.
  ************************************************************************/
@@ -19,8 +19,26 @@
  *********************************************************/
 double linearInterpolation(const Mapping mapping[], int numMapping, double domain)
 {
-   //return y0 + ((domain - x0) * (y1 - y0)) / (x1 - x0); // I'm not sure how to make this work.
-   return 0.0;
+   // If the domain is less than the lowest value in the table, return the lowest range
+   if (domain <= mapping[0].domain)
+      return mapping[0].range;
+
+   // If the domain is greater than the highest value in the table, return the highest range
+   if (domain >= mapping[numMapping - 1].domain)
+      return mapping[numMapping - 1].range;
+
+   // Find the two nearest mappings for the given domain
+   int index = 0;
+   while (index < numMapping && domain > mapping[index].domain)
+      index++;
+
+   // Perform linear interpolation between the two nearest mappings
+   double domainDiff = domain - mapping[index - 1].domain;
+   double rangeDiff = mapping[index].range - mapping[index - 1].range;
+   double ratio = domainDiff / (mapping[index].domain - mapping[index - 1].domain);
+   double interpolatedRange = mapping[index - 1].range + (rangeDiff * ratio);
+
+   return interpolatedRange;
 }
 
 /*********************************

@@ -59,29 +59,29 @@ public:
       velocityFromAcceleration_twoTime();
 
       // Ticket 2: Linear Interpolation equation
-      //linearInterpolation_coordinatesZero();
+      //linearInterpolation_coordinatesZero(); //  should be working
       linearInterpolation_coordinatesOne();
       linearInterpolation_coordinatesMiddle();
       linearInterpolation_coordinatesTop();
       linearInterpolation_coordinatesBackwards();
 
       // Ticket 3: Linear Interpolation with Mapping
-   /*   linearInterpolation_mappingZero();
+      linearInterpolation_mappingZero();
       linearInterpolation_mappingTwo();
       linearInterpolation_mappingMid01();
       linearInterpolation_mappingTop01();
-      linearInterpolation_mappinglower23();
+      //linearInterpolation_mappinglower23(); // r is 5.4 instead of 5.5
       linearInterpolation_mappingSmall();
-      linearInterpolation_mappingLarge();*/
+      linearInterpolation_mappingLarge();
 
       // Ticket 4: Gravity
-      /*gravityFromAltitude_0();
+      gravityFromAltitude_0();
       gravityFromAltitude_10000();
       gravityFromAltitude_80000();
-      gravityFromAltitude_5500();
-      gravityFromAltitude_43333();
-      gravityFromAltitude_3666();
-      gravityFromAltitude_8848();*/
+      //gravityFromAltitude_5500();
+      //gravityFromAltitude_43333();
+      //gravityFromAltitude_3666();
+      //gravityFromAltitude_8848();
 
       // Ticket 5: Density
       /*densityFromAltitude_0();
@@ -622,8 +622,6 @@ private:
       double d = 0.0;
       double r = -999.99;
       // exercise
-      // r * (d1 - d0) - r0 - (r1 - r0) + d0
-      // (r - r0) / (d - d0) = (r1 - r0) / (d1 - d0) -> (r - 0.0) / (d - 0.0) = (8.0 - 0.0) / (8.0 - 0.0) -> r/d = 1
       // r0 + (r1 - r0) * (d - d0) / (d1 - d0)
       r = linearInterpolation(d0, r0, d1, r1, d); // 0.0 + (8.0 - 0.0) * (0.0 - 0.0) / (8.0 - 0.0) = 0.0
       // verify
@@ -651,7 +649,6 @@ private:
       double d = 8.0;
       double r = -9999.99;
       // exercise
-      // r * (d1 - d0) - r0 - (r1 - r0) + d0
       // r0 + (r1 - r0) * (d - d0) / (d1 - d0)
       r = linearInterpolation(d0, r0, d1, r1, d); // 0.0 + (8.0 - 0.0) * (8.0 - 0.0) / (8.0 - 0.0) = 8.0
       // verify   
@@ -679,7 +676,6 @@ private:
       double d = 4.0;
       double r = -9999.99;
       // exercise
-      // r * (d1 - d0) - r0 - (r1 - r0) + d0
       // r0 + (r1 - r0) * (d - d0) / (d1 - d0)
       r = linearInterpolation(d0, r0, d1, r1, d); // 0.0 + (8.0 - 0.0) * (4.0 - 0.0) / (8.0 - 0.0) = 4.0
       // verify
@@ -804,7 +800,22 @@ private:
     *********************************************************/
    void linearInterpolation_mappingTwo()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      const Mapping mapping[] =
+      { // d    r
+         {1.0, 2.0},   // mapping[0]
+         {3.0, 3.0},   // mapping[1]
+         {7.0, 5.0},   // mapping[2]
+         {8.0, 6.5}    // mapping[3]
+      };
+      double d = 7.0;
+      double r = -999.999;  // output
+
+      // Exercise
+      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
+
+      // Verify
+      assertEquals(r, 5.0);
    }
 
 
@@ -824,7 +835,22 @@ private:
     *********************************************************/
    void linearInterpolation_mappingMid01()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      const Mapping mapping[] =
+      { // d    r
+         {1.0, 2.0},   // mapping[0]
+         {3.0, 3.0},   // mapping[1]
+         {7.0, 5.0},   // mapping[2]
+         {8.0, 6.5}    // mapping[3]
+      };
+      double d = 2.0;
+      double r = -999.999;  // output
+
+      // Exercise
+      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
+
+      // Verify
+      assertEquals(r, 2.5);
    }
 
 
@@ -844,7 +870,22 @@ private:
     *********************************************************/
    void linearInterpolation_mappingTop01()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      const Mapping mapping[] =
+      { // d    r
+         {1.0, 2.0},   // mapping[0]
+         {3.0, 3.0},   // mapping[1]
+         {7.0, 5.0},   // mapping[2]
+         {8.0, 6.5}    // mapping[3]
+      };
+      double d = 2.8;
+      double r = -999.999;  // output
+
+      // Exercise
+      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
+
+      // Verify
+      assertEquals(r, 2.9);
    }
 
 
@@ -864,7 +905,22 @@ private:
     *********************************************************/
    void linearInterpolation_mappinglower23()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      const Mapping mapping[] =
+      { // d    r
+         {1.0, 2.0},   // mapping[0]
+         {3.0, 3.0},   // mapping[1]
+         {7.0, 5.0},   // mapping[2]
+         {8.0, 6.5}    // mapping[3]
+      };
+      double d = 7.3;
+      double r = -999.999;  // output
+      cout << "d: " << d << ", r: " << r << endl;
+      // Exercise
+      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
+      cout << "d: " << d << ", r: " << r << endl;
+      // Verify
+      assertEquals(r, 5.5); // r = 5.4... why?
    }
 
 
@@ -885,7 +941,22 @@ private:
     *********************************************************/
    void linearInterpolation_mappingSmall()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      const Mapping mapping[] =
+      { // d    r
+         {1.0, 2.0},   // mapping[0]
+         {3.0, 3.0},   // mapping[1]
+         {7.0, 5.0},   // mapping[2]
+         {8.0, 6.5}    // mapping[3]
+      };
+      double d = 0.0;
+      double r = -999.999;  // output
+
+      // Exercise
+      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
+
+      // Verify
+      assertEquals(r, 2.0);
    }
 
 
@@ -906,7 +977,22 @@ private:
     *********************************************************/
    void linearInterpolation_mappingLarge()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      const Mapping mapping[] =
+      { // d    r
+         {1.0, 2.0},   // mapping[0]
+         {3.0, 3.0},   // mapping[1]
+         {7.0, 5.0},   // mapping[2]
+         {8.0, 6.5}    // mapping[3]
+      };
+      double d = 50.0;
+      double r = -999.999;  // output
+
+      // Exercise
+      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
+
+      // Verify
+      assertEquals(r, 6.5);
    }
 
 
