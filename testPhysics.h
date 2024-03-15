@@ -102,12 +102,12 @@ public:
       speedSoundFromAltitude_8848();
 
       // Ticket 7: Drag
-      dragFromMach_000(); // drag is 0.0 instead of 0.2. Is the header comment wrong?
+      dragFromMach_000(); // drag is 0.0 instead of 0.2.
       dragFromMach_500();
       dragFromMach_100();
       dragFromMach_060();
-      dragFromMach_010(); // drag is 0.0 instead of 0.2
-      dragFromMach_314(); // drag is 0.0 instead of 0.2
+      dragFromMach_010(); // drag is 0.0 instead of 0.0543. Is the header comment wrong?
+      dragFromMach_314(); // drag is 0.0 instead of 0.0543
 
       report("Physics");
    }
@@ -1459,7 +1459,7 @@ private:
       // exercise
       cout << "drag: " << drag;
       drag = dragFromMach(speedMach);
-      cout << ", new drag: " << drag << " expected: " << 0.0 << endl;
+      cout << ", new drag: " << drag << " expected: " << "0.0543" << endl;
       // verify
       assertEquals(drag, 0.0543);
    }  // teardown
@@ -1476,7 +1476,7 @@ private:
       // exercise
       cout << "drag: " << drag;
       drag = dragFromMach(speedMach);
-      cout << ", new drag: " << drag << " expected: " << 0.0 << endl;
+      cout << ", new drag: " << drag << " expected: " << "0.0543" << endl;
 
       // verify
       assertEquals(drag, 0.0543);
