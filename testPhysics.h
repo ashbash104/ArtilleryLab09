@@ -101,11 +101,11 @@ public:
       speedSoundFromAltitude_8848();
 
       // Ticket 7: Drag
-      dragFromMach_000(); // drag is 0.2 instead of 0.0? Shouldn't it be 0.1629 though, because it's out of range (domain <= 0.3)
+      dragFromMach_000(); // drag is 0.2 instead of 0.0. Shouldn't it be 0.1629 though, because it's out of range (domain <= 0.3)
       dragFromMach_500();
       dragFromMach_100();
       dragFromMach_060();
-      dragFromMach_010(); // drag is 0.0 instead of 0.0543 because the domain is out of range (<= 0.3)
+      dragFromMach_010(); // drag is 0.2 instead of 0.0543. Shouldn't it be 0.1629 though, because it's out of range (domain <= 0.3)
       dragFromMach_314(); // drag is 0.2 instead of 0.0543. It should be between 0.1629 and 0.1659 though.
 
       report("Physics");
