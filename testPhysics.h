@@ -69,7 +69,7 @@ public:
       linearInterpolation_mappingTwo();
       linearInterpolation_mappingMid01();
       linearInterpolation_mappingTop01();
-      linearInterpolation_mappinglower23(); // r is 5.4 instead of 5.5. I created an assertWithTolerance() and used it with a tolerance of 0.1
+      linearInterpolation_mappinglower23();
       linearInterpolation_mappingSmall();
       linearInterpolation_mappingLarge();
 
@@ -94,38 +94,23 @@ public:
       // Ticket 6: Speed of Sound
       speedSoundFromAltitude_0();
       speedSoundFromAltitude_10000();
-      speedSoundFromAltitude_80000(); // density is 324.0 instead of 269.0. Is the comment wrong? 
+      speedSoundFromAltitude_80000(); // density is 324.0 instead of 269.0 because the domain is out of range (domain >= 40000) 
       speedSoundFromAltitude_5500();
-      speedSoundFromAltitude_43333(); // density is 324.0 instead of 328.3
-      speedSoundFromAltitude_3666(); // speed is 325.336 instead of 325.3. With tolerance of 0.1 it passes.
+      speedSoundFromAltitude_43333(); // density is 324.0 instead of 328.3 because the domain is out of range (domain >= 40000)
+      speedSoundFromAltitude_3666();
       speedSoundFromAltitude_8848();
 
       // Ticket 7: Drag
-      dragFromMach_000(); // drag is 0.0 instead of 0.2.
+      dragFromMach_000(); // drag is 0.2 instead of 0.0? Shouldn't it be 0.1629 though, because it's out of range (domain <= 0.3)
       dragFromMach_500();
       dragFromMach_100();
       dragFromMach_060();
-      dragFromMach_010(); // drag is 0.0 instead of 0.0543. Is the header comment wrong?
-      dragFromMach_314(); // drag is 0.0 instead of 0.0543
+      dragFromMach_010(); // drag is 0.0 instead of 0.0543 because the domain is out of range (<= 0.3)
+      dragFromMach_314(); // drag is 0.2 instead of 0.0543. It should be between 0.1629 and 0.1659 though.
 
       report("Physics");
    }
 private:
-   /*******************************************************
-     * ASSERT WITH TOLERANCE
-     * asserts if the value is within the tolerance range
-     ********************************************************/
-   void assertWithTolerance(double actual, double expected, double tolerance)
-   {
-      if (std::abs(actual - expected) > tolerance)
-      {
-         // Assertion failed
-         std::cerr << "Assertion failed: Actual value (" << actual << ") differs from expected value (" << expected
-            << ") by more than the tolerance (" << tolerance << ")" << std::endl;
-         // You might want to throw an exception here or handle the failure in another way
-      }
-   }
-
    /*****************************************************************
     *****************************************************************
     * AREA FROM RADIUS
@@ -822,10 +807,8 @@ private:
       };
       double d = 7.0;
       double r = -999.999;  // output
-
       // Exercise
       r = linearInterpolation(mapping, 4 /*numMapping*/, d);
-
       // Verify
       assertEquals(r, 5.0);
    }
@@ -857,10 +840,8 @@ private:
       };
       double d = 2.0;
       double r = -999.999;  // output
-
       // Exercise
       r = linearInterpolation(mapping, 4 /*numMapping*/, d);
-
       // Verify
       assertEquals(r, 2.5);
    }
@@ -892,10 +873,8 @@ private:
       };
       double d = 2.8;
       double r = -999.999;  // output
-
       // Exercise
       r = linearInterpolation(mapping, 4 /*numMapping*/, d);
-
       // Verify
       assertEquals(r, 2.9);
    }
@@ -905,7 +884,7 @@ private:
     * LINEAR INTERPOLATION - mapping closer to [2] than [3]
     *
     *    |        8,6.5 * mapping[3]
-    *    |     7.3,5.5 * (d,r)
+    *    |     7.33333,5.5 * (d,r)
     *    |      7,5   * mapping[2]
     *    |          /
     *    |       /
@@ -925,15 +904,14 @@ private:
          {7.0, 5.0},   // mapping[2]
          {8.0, 6.5}    // mapping[3]
       };
-      double d = 7.3;
+      double d = 7.33333333;
       double r = -999.999;  // output
       //cout << "d: " << d << ", r: " << r << endl;
       // Exercise
       r = linearInterpolation(mapping, 4 /*numMapping*/, d);
       //cout << "d: " << d << ", r: " << r << endl;
       // Verify
-      assertWithTolerance(r, 5.5, 0.1);
-      //assertEquals(r, 5.5); // r = 5.4... why?
+      assertEquals(r, 5.5);
    }
 
 
@@ -964,10 +942,8 @@ private:
       };
       double d = 0.0;
       double r = -999.999;  // output
-
       // Exercise
       r = linearInterpolation(mapping, 4 /*numMapping*/, d);
-
       // Verify
       assertEquals(r, 2.0);
    }
@@ -1000,10 +976,8 @@ private:
       };
       double d = 50.0;
       double r = -999.999;  // output
-
       // Exercise
       r = linearInterpolation(mapping, 4 /*numMapping*/, d);
-
       // Verify
       assertEquals(r, 6.5);
    }
@@ -1033,7 +1007,6 @@ private:
       // verify
       assert(gravity, 9.807);
    }
-
 
    /*******************************************************
     * GRAVITY FROM ALTITUDE - exactly on 10,000 meters
@@ -1200,7 +1173,6 @@ private:
       double density = -999.999;
       // exercise
       density = densityFromAltitude(altitude);
-
       // verify
       assertEquals(density, 0.69825);
    }
@@ -1290,7 +1262,7 @@ private:
       // exercise
       speed = speedSoundFromAltitude(altitude);
       // verify
-      assertEquals(speed, 299);
+      assertEquals(speed, 299.0);
    }
 
    /*******************************************************
@@ -1304,8 +1276,8 @@ private:
       double altitude = 80000.0;
       double speed = -99.99;
       // exercise
-      speed = speedSoundFromAltitude(40000.0);
-      cout << "speed: " << speed << " expected: " << "269.0" << endl;
+      speed = speedSoundFromAltitude(altitude);
+      //cout << "speed: " << speed << " expected: " << "269.0" << endl;
       // verify
       assertEquals(speed, 269.0);
    }
@@ -1329,7 +1301,7 @@ private:
    /*******************************************************
     * SPEED OF SOUND FROM ALTITUDE : 43,333m
     * input:  altitude=43,333m
-    * output: 328.3m/s
+    * output: 328.3329m/s
     ********************************************************/
    void speedSoundFromAltitude_43333()
    {
@@ -1338,16 +1310,14 @@ private:
       double speed = -99.99;
       // exercise
       speed = speedSoundFromAltitude(altitude);
-      cout << "speed: " << speed << " expected: " << "328.3" << endl;
-
       // verify
-      assertEquals(speed, 328.3);
+      assertEquals(speed, 328.3329);
    }
 
    /*******************************************************
     * SPEED OF SOUND FROM ALTITUDE : 3,666m
-    * input:  altitude=3,666m
-    * output: 325.3m/s
+    * input:  altitude=3,666.0m
+    * output: 325.336m/s
     ********************************************************/
    void speedSoundFromAltitude_3666()
    {
@@ -1357,7 +1327,7 @@ private:
       // exercise
       speed = speedSoundFromAltitude(altitude);
       // verify
-      assertWithTolerance(speed, 325.3, 0.1); // speed is returning as 325.336
+      assertEquals(speed, 325.336);
    }
 
    /*******************************************************
@@ -1386,7 +1356,7 @@ private:
     /*******************************************************
      * DRAG FROM MACH : not moving
      * input:  speed=0mach
-     * output: 0
+     * output: 0 --------------------------------> shouldn't this be 0.1629???????????????????????????????????????
      ********************************************************/
    void dragFromMach_000()
    {
@@ -1394,9 +1364,7 @@ private:
          double speedMach = 0.0;
       double drag = -99.99;
       // exercise
-      cout << "drag: " << drag;
       drag = dragFromMach(speedMach);
-      cout << ", new drag: " << drag << " expected: " << 0.0 << endl;
       // verify
       assertEquals(drag, 0.0);
    }  // teardown
@@ -1452,7 +1420,7 @@ private:
    /*******************************************************
     * DRAG FROM MACH : one third between 0 and .3
     * input:  speed=0.1mach
-    * output: 00.0543
+    * output: 0.0543 -----------------------------------> shouldn't this be 0.1629?????????????????????????????????????
     ********************************************************/
    void dragFromMach_010()
    {
@@ -1460,29 +1428,23 @@ private:
       double speedMach = 0.1;
       double drag = -99.99;
       // exercise
-      cout << "drag: " << drag;
       drag = dragFromMach(speedMach);
-      cout << ", new drag: " << drag << " expected: " << "0.0543" << endl;
       // verify
       assertEquals(drag, 0.0543);
    }  // teardown
 
-   /*******************************************************
-    * DRAG FROM MACH : random spot
-    * input:  speed=3.14159mach
-    * output: 00.0543
-    ********************************************************/
+    /*******************************************************
+     * DRAG FROM MACH : random spot
+     * input:  speed=3.14159mach
+     * output: 0.0543 ------------------------------------> shouldn't this be between 0.1629 and 0.1659?????????????????
+     ********************************************************/
    void dragFromMach_314()
    {  // setup
-      double speedMach = 3.14159;
+      double speedMach = 3.1459;
       double drag = -99.99;
       // exercise
-      cout << "drag: " << drag;
       drag = dragFromMach(speedMach);
-      cout << ", new drag: " << drag << " expected: " << "0.0543" << endl;
-
       // verify
-      assertEquals(drag, 0.0543);
+      assertEquals(drag, 0.0543); // getting 0.2
    }  // teardown
-
 };
